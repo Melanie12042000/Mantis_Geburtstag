@@ -5,7 +5,7 @@ const QUIZ1 = "quiz1";
 const GAME2 = "game2";
 const QUIZ2 = "quiz2";
 const END = "end";
-const TEST_MODE = true;
+const TEST_MODE = false;
 
 
 let state = MENU;
