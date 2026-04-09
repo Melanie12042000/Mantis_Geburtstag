@@ -431,7 +431,7 @@ prevBoardBtn.addEventListener("click", () => {
 });
 
 progressBoardBtn.addEventListener("click", () => {
-  /*
+
   if (!boardPassed[boardIndex]) {
     if (solved(boardIndex)) {
       boardPassed[boardIndex] = true;
@@ -442,7 +442,7 @@ progressBoardBtn.addEventListener("click", () => {
   } else {
     nextBoard();
   }
-  */
+  
 
   nextBoard();
 });
