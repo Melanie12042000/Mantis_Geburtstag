@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudoku – Mantis Edition</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="screen" id="screen-menu">
+      <div class="title-panel">
+        <h1>Sudoku – Start</h1>
+      </div>
+
+      <div class="menu-buttons">
+        <button id="start-btn" class="big-btn" disabled>
+          Bitte erst Infotext lesen
+        </button>
+
+        <button id="info-btn" class="big-btn">
+          Info
+        </button>
+
+        <button id="close-btn" class="big-btn secondary-btn">
+          Schließen
+        </button>
+      </div>
+    </div>
+
+    <div class="screen hidden" id="screen-info">
+      <div class="title-panel">
+        <h1>Info</h1>
+      </div>
+
+      <div class="panel info-panel">
+        <div id="info-text"></div>
+      </div>
+
+      <div class="bottom-row">
+        <button id="back-from-info-btn" class="big-btn">
+          Zurück zum Menü
+        </button>
+      </div>
+    </div>
+
+    <div class="screen hidden" id="screen-game">
+      <div class="title-panel">
+        <h1>Sudoku – Mantis Edition</h1>
+      </div>
+
+      <div class="panel game-panel">
+        <div class="game-topbar">
+          <div id="board-label">Level 1 • Board 1</div>
+          <div id="game-hint">Pfeile: bewegen • Ziffern/Shift+Ziffern • Entf</div>
+        </div>
+
+        <div id="board-stage" class="board-stage">
+          <div id="board-bg" class="board-bg"></div>
+          <div id="sudoku-board" class="sudoku-board"></div>
+        </div>
+      </div>
+
+      <div class="bottom-row bottom-row-game">
+        <button id="prev-board-btn" class="big-btn secondary-btn">Vorheriges Board</button>
+        <button id="progress-board-btn" class="big-btn secondary-btn">Check</button>
+        <button id="back-from-game-btn" class="big-btn">Zurück zum Menü</button>
+      </div>
+    </div>
+
+    <div class="screen hidden" id="screen-quiz">
+      <div class="title-panel">
+        <h1 id="quiz-title">Endrätsel</h1>
+      </div>
+
+      <div class="panel quiz-panel">
+        <p id="quiz-prompt" class="quiz-prompt">Frage</p>
+
+        <input id="quiz-input" class="quiz-input" type="text" autocomplete="off" />
+
+        <button id="quiz-submit-btn" class="big-btn">Antwort prüfen</button>
+
+        <p id="quiz-message" class="quiz-message"></p>
+      </div>
+    </div>
+
+    <div class="screen hidden" id="screen-end">
+      <div class="title-panel">
+        <h1>Geschafft!</h1>
+      </div>
+
+      <div class="panel end-panel">
+        <p>Danke fürs Spielen 🧡</p>
+        <p>Du hast beide Rätsel gelöst.</p>
+        <p>Happy Birthday!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
