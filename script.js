@@ -5,6 +5,7 @@ const QUIZ1 = "quiz1";
 const GAME2 = "game2";
 const QUIZ2 = "quiz2";
 const END = "end";
+const TEST_MODE = false;
 
 
 let state = MENU;
@@ -14,6 +15,8 @@ const QUIZ2_ANSWER = "SNACKBUX";
 
 let quizInput = "";
 let quizMessage = "";
+const finalCanvas = document.getElementById("final-canvas");
+
 
 
 const boardBgEl = document.getElementById("board-bg");
@@ -26,6 +29,7 @@ const LEVEL2_WORD = "SNACKBUX";
 const LETTER_FOR_FOUR = new Array(15).fill(null);
 LEVEL1_INDICES.forEach((idx, i) => LETTER_FOR_FOUR[idx] = LEVEL1_WORD[i]);
 LEVEL2_INDICES.forEach((idx, i) => LETTER_FOR_FOUR[idx] = LEVEL2_WORD[i]);
+
 
 const INFO_TEXT = [
   "Hi Manti!",
@@ -402,6 +406,7 @@ function render() {
     prepareQuiz(state);
   } else if (state === END) {
     screenEnd.classList.remove("hidden");
+    renderFinalCanvas();
   }
 }
 
@@ -431,7 +436,7 @@ prevBoardBtn.addEventListener("click", () => {
 });
 
 progressBoardBtn.addEventListener("click", () => {
-
+  /*
   if (!boardPassed[boardIndex]) {
     if (solved(boardIndex)) {
       boardPassed[boardIndex] = true;
@@ -442,7 +447,7 @@ progressBoardBtn.addEventListener("click", () => {
   } else {
     nextBoard();
   }
-  
+  */
 
   nextBoard();
 });
@@ -457,6 +462,11 @@ closeBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (event) => {
+    if (TEST_MODE && event.key === "F9") {
+  event.preventDefault();
+  jumpToNextTestStage();
+  return;
+}
     if (state === QUIZ1 || state === QUIZ2) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -543,6 +553,137 @@ quizSubmitBtn.addEventListener("click", () => {
     }
   }
 });
+
+function renderFinalCanvas() {
+  if (!finalCanvas) return;
+
+  const ctx = finalCanvas.getContext("2d");
+  const img = new Image();
+
+  img.onload = () => {
+    const cols = 3;
+    const rows = 5;
+
+    const tileW = finalCanvas.width / cols;
+    const tileH = finalCanvas.height / rows;
+
+    ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
+
+    // Ganzes Bild in die komplette 3x5-Fläche zeichnen
+    ctx.drawImage(img, 0, 0, finalCanvas.width, finalCanvas.height);
+
+    // Sudoku-Overlay pro Brett
+    for (let boardIdx = 0; boardIdx < 15; boardIdx++) {
+      const col = boardIdx % cols;
+      const row = Math.floor(boardIdx / cols);
+
+      const offsetX = col * tileW;
+      const offsetY = row * tileH;
+
+      drawSolvedBoardOnCanvas(ctx, boards[boardIdx], boardIdx, offsetX, offsetY, tileW, tileH);
+    }
+  };
+
+  img.src = "assets/mantiva.png";
+}
+
+function drawSolvedBoardOnCanvas(ctx, board, boardIdx, offsetX, offsetY, tileW, tileH) {
+  const cellW = tileW / 9;
+  const cellH = tileH / 9;
+
+  // leichter dunkler Overlay pro Brett
+  ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.fillRect(offsetX, offsetY, tileW, tileH);
+
+  // Zellen leicht aufhellen
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      const x = offsetX + c * cellW;
+      const y = offsetY + r * cellH;
+
+      const cell = board[r][c];
+
+      ctx.fillStyle = cell.fixed
+        ? "rgba(255,255,255,0.22)"
+        : "rgba(255,255,255,0.10)";
+      ctx.fillRect(x, y, cellW, cellH);
+    }
+  }
+
+  // Gridlinien
+  for (let i = 0; i <= 9; i++) {
+    ctx.beginPath();
+    ctx.lineWidth = i % 3 === 0 ? 2 : 1;
+    ctx.strokeStyle = "black";
+
+    // vertikal
+    ctx.moveTo(offsetX + i * cellW, offsetY);
+    ctx.lineTo(offsetX + i * cellW, offsetY + tileH);
+    ctx.stroke();
+
+    // horizontal
+    ctx.beginPath();
+    ctx.lineWidth = i % 3 === 0 ? 2 : 1;
+    ctx.strokeStyle = "black";
+    ctx.moveTo(offsetX, offsetY + i * cellH);
+    ctx.lineTo(offsetX + tileW, offsetY + i * cellH);
+    ctx.stroke();
+  }
+
+  // Zahlen/Buchstaben
+  ctx.fillStyle = "black";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `bold ${Math.floor(cellH * 0.52)}px Arial`;
+
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      const value = board[r][c].value;
+      if (!value) continue;
+
+      let displayValue = String(value);
+      if (value === 4 && LETTER_FOR_FOUR[boardIdx]) {
+        displayValue = LETTER_FOR_FOUR[boardIdx];
+      }
+
+      const x = offsetX + c * cellW + cellW / 2;
+      const y = offsetY + r * cellH + cellH / 2;
+
+      ctx.fillText(displayValue, x, y);
+    }
+  }
+}
+
+function jumpToNextTestStage() {
+  if (state === MENU) {
+    infoRead = true;
+    setState(GAME1);
+    return;
+  }
+
+  if (state === GAME1) {
+    setState(QUIZ1);
+    return;
+  }
+
+  if (state === QUIZ1) {
+    boardIndex = LEVEL2_INDICES[0];
+    selectedRow = 0;
+    selectedCol = 0;
+    setState(GAME2);
+    return;
+  }
+
+  if (state === GAME2) {
+    setState(QUIZ2);
+    return;
+  }
+
+  if (state === QUIZ2) {
+    setState(END);
+    return;
+  }
+}
 
 renderInfoText();
 render();
