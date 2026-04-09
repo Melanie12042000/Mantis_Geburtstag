@@ -328,3 +328,36 @@ body {
   background: rgb(235, 235, 235);
   color: rgb(20, 24, 28);
 }
+
+.final-grid {
+  width: min(100%, 540px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.final-tile {
+  aspect-ratio: 1 / 1;
+  background-image: url("assets/mantiva.png");
+  background-repeat: no-repeat;
+  background-size: 300% 500%;
+  border-radius: 8px;
+}
+
+.final-canvas {
+  width: min(100%, 720px);
+  height: auto;
+  display: block;
+  border: 3px solid black;
+  border-radius: 12px;
+  background: rgb(20, 20, 20);
+}
+
+.end-panel {
+  width: min(100%, 780px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
