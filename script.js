@@ -56,7 +56,8 @@ const INFO_TEXT = [
   "",
   "Bist die Beste, Mantis EUW 🧡",
   "",
-  "P.S. : Wunder dich nicht wenn du beim drücken einer bestimmten Zahl einen Buchstaben setzt. das soll so :)", 
+  "P.S. : Wunder dich nicht wenn du beim drücken einer bestimmten Zahl einen Buchstaben setzt.",
+  "das soll so :)", 
   "(weil ich ja weiß dass das deine Lieblingszahl ist xD)"
 ];
 
