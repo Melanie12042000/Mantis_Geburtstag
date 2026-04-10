@@ -693,4 +693,3 @@ function jumpToNextTestStage() {
 
 renderInfoText();
 render();
-
