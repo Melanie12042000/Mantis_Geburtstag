@@ -460,7 +460,7 @@ closeBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if (TEST_MODE && event.key === "F9") {
+    if (TEST_MODE && event.key === "q") {
   event.preventDefault();
   jumpToNextTestStage();
   return;
