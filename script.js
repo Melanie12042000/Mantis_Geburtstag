@@ -446,6 +446,7 @@ progressBoardBtn.addEventListener("click", () => {
   } else {
     nextBoard();
   }
+  
 
   nextBoard();
 });
@@ -460,7 +461,7 @@ closeBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if (TEST_MODE && event.key === "q") {
+    if (TEST_MODE && event.key === "F9") {
   event.preventDefault();
   jumpToNextTestStage();
   return;
