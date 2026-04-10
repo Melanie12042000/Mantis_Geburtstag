@@ -49,9 +49,15 @@ const INFO_TEXT = [
   "mit denen du im Anschluss noch zwei Rätsel löst,",
   "also behalte sie im Hinterkopf!",
   "",
-  "Viel Spaß beim Lösen :D",
+  "REGELN:",
+  "Zum Normalen setzen von Zahlen einfach die Zahl in der oberen Leiste drücken",
+  "Zum setzen von Pencil marks it shift+Zahl"
+   "Viel Spaß beim Lösen :D",
   "",
-  "Bist die Beste, Mantis EUW 🧡"
+  "Bist die Beste, Mantis EUW 🧡",
+  "",
+  "P.S. : Wunder dich nicht wenn du beim drücken einer bestimmten Zahl einen Buchstaben setzt. das soll so :)", 
+  "(weil ich ja weiß dass das deine Lieblingszahl ist xD)"
 ];
 
 const SUDOKU_UNSOLVED = [
