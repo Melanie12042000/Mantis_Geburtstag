@@ -51,7 +51,7 @@ const INFO_TEXT = [
   "",
   "REGELN:",
   "Zum Normalen setzen von Zahlen einfach die Zahl in der oberen Leiste drücken",
-  "Zum setzen von Pencil marks it shift+Zahl"
+  "Zum setzen von Pencil marks it shift+Zahl",
    "Viel Spaß beim Lösen :D",
   "",
   "Bist die Beste, Mantis EUW 🧡",
