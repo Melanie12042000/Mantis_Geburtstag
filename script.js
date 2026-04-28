@@ -454,9 +454,6 @@ progressBoardBtn.addEventListener("click", () => {
   } else {
     nextBoard();
   }
-  
-
-  nextBoard();
 });
   
 
